@@ -70,6 +70,17 @@ public class Application {
 
 //		cd.delete(UUID.fromString("b917939f-d99b-4184-a300-4a6dc9324908"));
 
+		System.out.println();
+		log.info("---------------------- Catalogo Trovato per id ----------------------");
+
+		Catalogo trovatoPerISBN = cd.getByISBN(UUID.fromString("09078845-39bf-4553-b97d-a363775f7dbc"));
+
+		if (trovatoPerISBN != null) {
+			log.info(trovatoPerISBN.toString());
+		} else {
+			log.info("Nessun catalogo trovato per l'id inserito.");
+		}
+
 		List<Catalogo> trovatoPerAnno = cd.getByYear(2023);
 		System.out.println();
 		log.info("---------------------- Cataloghi Trovati per anno ----------------------");
