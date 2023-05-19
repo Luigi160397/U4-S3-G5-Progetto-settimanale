@@ -37,30 +37,36 @@ public class Application {
 		Catalogo libro3 = new Libro("Harry Potter 3", 2015, 156, "JK Rowling", "Fantasy");
 		Catalogo rivista1 = new Rivista("Time", 2023, 20, Periodicita.SETTIMANALE);
 		Catalogo rivista2 = new Rivista("Famiglia Cristiana", 2023, 20, Periodicita.MENSILE);
+		Catalogo rivista3 = new Rivista("TV Sorrisi e Canzoni", 2015, 22, Periodicita.SEMESTRALE);
 
 		Utente aldo = new Utente("Aldo", "Baglio", LocalDate.of(1983, 2, 10));
 		Utente giacomo = new Utente("Giacomo", "Poretti", LocalDate.of(1965, 3, 13));
 		Utente giovanni = new Utente("Giovanni", "Storti", LocalDate.of(1970, 10, 10));
+		Utente marco = new Utente("Marco", "Aurelio", LocalDate.of(1945, 1, 10));
 
 		Prestito prestito1 = new Prestito(aldo, libro1, LocalDate.of(2020, 10, 7), LocalDate.of(2021, 1, 10));
 		Prestito prestito2 = new Prestito(giacomo, rivista2, LocalDate.of(2023, 5, 11), LocalDate.of(2023, 7, 16));
 		Prestito prestito3 = new Prestito(giovanni, libro3, LocalDate.of(2023, 3, 14), LocalDate.of(2023, 6, 20));
 		Prestito prestito4 = new Prestito(giovanni, libro3, LocalDate.of(2023, 3, 14));
+		Prestito prestito5 = new Prestito(marco, rivista3, LocalDate.of(2023, 3, 16));
 
 //		cd.save(libro1);
 //		cd.save(libro2);
 //		cd.save(libro3);
 //		cd.save(rivista1);
 //		cd.save(rivista2);
+//		cd.save(rivista3);
 //
 //		ud.save(aldo);
 //		ud.save(giacomo);
 //		ud.save(giovanni);
+//		ud.save(marco);
 //
 //		pd.save(prestito1);
 //		pd.save(prestito2);
 //		pd.save(prestito3);
 //		pd.save(prestito4);
+//		pd.save(prestito5);
 
 //		cd.delete(UUID.fromString("b917939f-d99b-4184-a300-4a6dc9324908"));
 
