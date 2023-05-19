@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import application.catalogo.Catalogo;
@@ -16,6 +17,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "prestiti")
+@NamedQuery(name = "findByNumeroTesseraUtente", query = "SELECT p FROM Prestito p WHERE p.utente.numeroDiTessera = :numeroTessera AND p.dataRestituzioneEffettiva IS NULL")
+@NamedQuery(name = "findPrestitiScadutiNonRestituiti", query = "SELECT p FROM Prestito p WHERE p.dataRestituzionePrevista < :oggi AND p.dataRestituzioneEffettiva IS NULL")
 
 @Getter
 @Setter
@@ -41,6 +44,18 @@ public class Prestito {
 		this.dataInizioPrestito = dataInizioPrestito;
 
 		this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
+
+		this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);
+
+	}
+
+	public Prestito(Utente utente, Catalogo elementoPrestato, LocalDate dataInizioPrestito) {
+
+		this.utente = utente;
+		this.elementoPrestato = elementoPrestato;
+		this.dataInizioPrestito = dataInizioPrestito;
+
+		this.dataRestituzioneEffettiva = null;
 
 		this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);
 

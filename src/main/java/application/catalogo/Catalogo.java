@@ -3,6 +3,7 @@ package application.catalogo;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public abstract class Catalogo {
 	private String titolo;
 	private int annoPublicazione;
 	private int nPagine;
-	@OneToMany(mappedBy = "elementoPrestato")
+	@OneToMany(mappedBy = "elementoPrestato", cascade = CascadeType.ALL)
 	private Set<Prestito> cataloghiPrestati;
 
 	public Catalogo(String titolo, int annoPubblicazione, int nPagine) {

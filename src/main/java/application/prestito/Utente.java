@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class Utente {
 	private String nome;
 	private String cognome;
 	private LocalDate dataDiNascita;
-	@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
 	private Set<Prestito> prestiti;
 
 	public Utente(String nome, String cognome, LocalDate dataDiNascita) {

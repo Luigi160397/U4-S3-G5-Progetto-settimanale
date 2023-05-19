@@ -1,6 +1,8 @@
 package application;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,8 +16,10 @@ import application.prestito.Utente;
 import dao.CatalogoDao;
 import dao.PrestitoDAO;
 import dao.UtenteDAO;
+import lombok.extern.slf4j.Slf4j;
 import utils.JpaUtil;
 
+@Slf4j
 public class Application {
 
 	private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
@@ -41,6 +45,7 @@ public class Application {
 		Prestito prestito1 = new Prestito(aldo, libro1, LocalDate.of(2020, 10, 7), LocalDate.of(2021, 1, 10));
 		Prestito prestito2 = new Prestito(giacomo, rivista2, LocalDate.of(2023, 5, 11), LocalDate.of(2023, 7, 16));
 		Prestito prestito3 = new Prestito(giovanni, libro3, LocalDate.of(2023, 3, 14), LocalDate.of(2023, 6, 20));
+		Prestito prestito4 = new Prestito(giovanni, libro3, LocalDate.of(2023, 3, 14));
 
 //		cd.save(libro1);
 //		cd.save(libro2);
@@ -55,6 +60,60 @@ public class Application {
 //		pd.save(prestito1);
 //		pd.save(prestito2);
 //		pd.save(prestito3);
+//		pd.save(prestito4);
+
+//		cd.delete(UUID.fromString("b917939f-d99b-4184-a300-4a6dc9324908"));
+
+		List<Catalogo> trovatoPerAnno = cd.getByYear(2023);
+		System.out.println();
+		log.info("---------------------- Cataloghi Trovati per anno ----------------------");
+
+		if (trovatoPerAnno.size() > 0) {
+			trovatoPerAnno.stream().forEach(c -> log.info(c.toString()));
+		} else {
+			log.info("Nessun catalogo trovato per l'anno inserito.");
+		}
+
+		List<Libro> trovatoPerAutore = cd.getByAuthor("JK Rowling");
+		System.out.println();
+		log.info("---------------------- Cataloghi Trovati per autore ----------------------");
+
+		if (trovatoPerAutore.size() > 0) {
+			trovatoPerAutore.stream().forEach(c -> log.info(c.toString()));
+		} else {
+			log.info("Nessun catalogo trovato per l'autore inserito.");
+		}
+
+		List<Catalogo> trovatoPerTitolo = cd.getByTitle("Famiglia");
+		System.out.println();
+		log.info("---------------------- Cataloghi Trovati per titolo ----------------------");
+
+		if (trovatoPerTitolo.size() > 0) {
+			trovatoPerTitolo.stream().forEach(c -> log.info(c.toString()));
+		} else {
+			log.info("Nessun catalogo trovato per il titolo inserito.");
+		}
+
+		List<Prestito> trovatoPerNTessera = pd
+				.getByNumeroDiTessera(UUID.fromString("8a3bad5c-d663-45c6-a18f-249f20ae3c0b"));
+		System.out.println();
+		log.info("---------------------- Prestiti attivi trovati per Numero di Tessera ----------------------");
+
+		if (trovatoPerNTessera.size() > 0) {
+			trovatoPerNTessera.stream().forEach(c -> log.info(c.toString()));
+		} else {
+			log.info("Nessun prestito attivo trovato per il Numero di Tessera inserito.");
+		}
+
+		List<Prestito> trovatoPrestitiScaduti = pd.getPrestitiScadutiENonRestituiti();
+		System.out.println();
+		log.info("---------------------- Prestiti scaduti e non restituiti trovati ----------------------");
+
+		if (trovatoPrestitiScaduti.size() > 0) {
+			trovatoPrestitiScaduti.stream().forEach(c -> log.info(c.toString()));
+		} else {
+			log.info("Nessun prestito scaduto o non restituito trovato.");
+		}
 
 		em.close();
 		emf.close();

@@ -1,9 +1,12 @@
 package dao;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import application.prestito.Prestito;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +45,18 @@ public class PrestitoDAO {
 		} else {
 			log.info("Prestito con id " + id + " non trovato!");
 		}
+	}
+
+	public List<Prestito> getByNumeroDiTessera(UUID nTessera) {
+		TypedQuery<Prestito> query = em.createNamedQuery("findByNumeroTesseraUtente", Prestito.class);
+		query.setParameter("numeroTessera", nTessera);
+		return query.getResultList();
+	}
+
+	public List<Prestito> getPrestitiScadutiENonRestituiti() {
+		TypedQuery<Prestito> query = em.createNamedQuery("findPrestitiScadutiNonRestituiti", Prestito.class);
+		query.setParameter("oggi", LocalDate.now());
+		return query.getResultList();
 	}
 
 }
