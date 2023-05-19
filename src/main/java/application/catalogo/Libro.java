@@ -1,5 +1,17 @@
 package application.catalogo;
 
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NamedQuery(name = "findByAuthor", query = "SELECT l FROM Libro l WHERE l.autore = :autore")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Libro extends Catalogo {
 
 	private String autore;
@@ -12,26 +24,10 @@ public class Libro extends Catalogo {
 
 	}
 
-	public String getAutore() {
-		return autore;
-	}
-
-	public void setAutore(String autore) {
-		this.autore = autore;
-	}
-
-	public String getGenere() {
-		return genere;
-	}
-
-	public void setGenere(String genere) {
-		this.genere = genere;
-	}
-
 	@Override
 	public String toString() {
 		return "ISBN: " + getISBN() + ", Titolo: " + getTitolo() + ", Anno Pubblicazione " + getAnnoPublicazione()
-				+ ", Numero pagine: " + getnPagine() + ", Autore: " + getAutore() + ", Genere: " + getGenere()
+				+ ", Numero pagine: " + getNPagine() + ", Autore: " + getAutore() + ", Genere: " + getGenere()
 				+ System.lineSeparator();
 	};
 

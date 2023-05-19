@@ -1,7 +1,22 @@
 package application.catalogo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Rivista extends Catalogo {
 
+	@Column(name = "periodicità")
+	@Enumerated(EnumType.STRING)
 	private Periodicita periodicita;
 
 	public Rivista(String titolo, int annoPubblicazione, int nPagine, Periodicita period) {
@@ -10,18 +25,10 @@ public class Rivista extends Catalogo {
 
 	}
 
-	public Periodicita getPeriodicita() {
-		return periodicita;
-	}
-
-	public void setPeriodicita(Periodicita periodicita) {
-		this.periodicita = periodicita;
-	}
-
 	@Override
 	public String toString() {
 		return "ISBN: " + getISBN() + ", Titolo: " + getTitolo() + ", Anno Pubblicazione " + getAnnoPublicazione()
-				+ ", Numero pagine: " + getnPagine() + ", Periodicità: " + getPeriodicita() + System.lineSeparator();
+				+ ", Numero pagine: " + getNPagine() + ", Periodicità: " + getPeriodicita() + System.lineSeparator();
 	};
 
 }
